@@ -1,0 +1,140 @@
+
+There are no discarded input sections
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+FLASH            0x08000000         0x00020000         xr
+SRAM             0x20000000         0x00005000         xrw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD Release\revision.o
+LOAD Release\stm32f103c8tx_Startup.o
+                0x20005000                        _estack = (ORIGIN (SRAM) + LENGTH (SRAM))
+
+.text           0x08000000      0x1d8
+                0x08000000                        . = ALIGN (0x4)
+ *(.isr_vector_tbl*)
+ .isr_vector_tbl*
+                0x08000000       0xec Release\stm32f103c8tx_Startup.o
+                0x08000000                vector_tbl
+ *(.text*)
+ .text          0x080000ec        0x0 Release\revision.o
+ .text.specific
+                0x080000ec       0x5c Release\revision.o
+                0x080000ec                specific
+ .text          0x08000148        0x0 Release\stm32f103c8tx_Startup.o
+ .text.Default_Handler
+                0x08000148        0x6 Release\stm32f103c8tx_Startup.o
+                0x08000148                EXTI2_IRQHandler
+                0x08000148                SVCall_Handler
+                0x08000148                TIM1_CC_IRQHandler
+                0x08000148                Systick_Handler
+                0x08000148                HardFault_Handler
+                0x08000148                PVD_IRQHandler
+                0x08000148                PendSV_Handler
+                0x08000148                NMI_Handler
+                0x08000148                EXTI3_IRQHandler
+                0x08000148                USB_HP_CAN_TX_IRQHandler
+                0x08000148                EXTI0_IRQHandler
+                0x08000148                I2C2_EV_IRQHandler
+                0x08000148                UsageFault_Handler
+                0x08000148                ADC1_2_IRQHandler
+                0x08000148                SPI1_IRQHandler
+                0x08000148                CAN_SCE_IRQHandler
+                0x08000148                TAMPER_IRQHandler
+                0x08000148                DMA1_Channel4_IRQHandler
+                0x08000148                USART3_IRQHandler
+                0x08000148                RTC_IRQHandler
+                0x08000148                DMA1_Channel7_IRQHandler
+                0x08000148                USBWakeup_IRQHandler
+                0x08000148                TIM4_IRQHandler
+                0x08000148                CAN_RX1_IRQHandler
+                0x08000148                I2C1_EV_IRQHandler
+                0x08000148                DMA1_Channel6_IRQHandler
+                0x08000148                TIM3_IRQHandler
+                0x08000148                RCC_IRQHandler
+                0x08000148                TIM1_TRG_COM_IRQHandler
+                0x08000148                DMA1_Channel1_IRQHandler
+                0x08000148                Default_Handler
+                0x08000148                EXTI15_10_IRQHandler
+                0x08000148                EXTI9_5_IRQHandler
+                0x08000148                SPI2_IRQHandler
+                0x08000148                USB_LP_CAN_RX0_IRQHandler
+                0x08000148                DMA1_Channel5_IRQHandler
+                0x08000148                EXTI4_IRQHandler
+                0x08000148                DMA1_Channel3_IRQHandler
+                0x08000148                TIM1_UP_IRQHandler
+                0x08000148                WWDG_IRQHandler
+                0x08000148                TIM2_IRQHandler
+                0x08000148                EXTI1_IRQHandler
+                0x08000148                RTCAlarm_IRQHandler
+                0x08000148                USART2_IRQHandler
+                0x08000148                I2C2_ER_IRQHandler
+                0x08000148                DMA1_Channel2_IRQHandler
+                0x08000148                FLASH_IRQHandler
+                0x08000148                BusFault_Handler
+                0x08000148                USART1_IRQHandler
+                0x08000148                TIM1_BPK_IRQHandler
+                0x08000148                I2C1_ER_IRQHandler
+                0x08000148                MemMangagement_Handler
+ *fill*         0x0800014e        0x2 
+ .text.Reset_Handler
+                0x08000150       0x88 Release\stm32f103c8tx_Startup.o
+                0x08000150                Reset_Handler
+ *(.rodata*)
+                0x080001d8                        _etext = .
+
+.glue_7         0x080001d8        0x0
+ .glue_7        0x080001d8        0x0 linker stubs
+
+.glue_7t        0x080001d8        0x0
+ .glue_7t       0x080001d8        0x0 linker stubs
+
+.vfp11_veneer   0x080001d8        0x0
+ .vfp11_veneer  0x080001d8        0x0 linker stubs
+
+.v4_bx          0x080001d8        0x0
+ .v4_bx         0x080001d8        0x0 linker stubs
+
+.iplt           0x080001d8        0x0
+ .iplt          0x080001d8        0x0 Release\stm32f103c8tx_Startup.o
+
+.rel.dyn        0x080001d8        0x0
+ .rel.iplt      0x080001d8        0x0 Release\stm32f103c8tx_Startup.o
+
+.data           0x20000000        0x0 load address 0x080001d8
+                0x20000000                        . = ALIGN (0x4)
+                0x20000000                        _sdata = .
+ *(.data*)
+ .data          0x20000000        0x0 Release\revision.o
+ .data          0x20000000        0x0 Release\stm32f103c8tx_Startup.o
+                0x20000000                        _edata = .
+                0x20000000                        . = ALIGN (0x4)
+
+.igot.plt       0x20000000        0x0 load address 0x080001d8
+ .igot.plt      0x20000000        0x0 Release\stm32f103c8tx_Startup.o
+
+.bss            0x20000000        0x0 load address 0x080001d8
+                0x20000000                        . = ALIGN (0x4)
+                0x20000000                        _sbss = .
+                0x20000000                        . = ALIGN (0x4)
+                0x20000000                        _ebss = .
+ .bss           0x20000000        0x0 Release\revision.o
+ .bss           0x20000000        0x0 Release\stm32f103c8tx_Startup.o
+OUTPUT(Release\final.elf elf32-littlearm)
+LOAD linker stubs
+
+.comment        0x00000000       0x43
+ .comment       0x00000000       0x43 Release\revision.o
+                                 0x44 (size before relaxing)
+ .comment       0x00000043       0x44 Release\stm32f103c8tx_Startup.o
+
+.ARM.attributes
+                0x00000000       0x2d
+ .ARM.attributes
+                0x00000000       0x2d Release\revision.o
+ .ARM.attributes
+                0x0000002d       0x2d Release\stm32f103c8tx_Startup.o
